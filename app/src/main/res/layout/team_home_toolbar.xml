@@ -1,6 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.appcompat.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="120dp"
+    android:background="@color/home_status_bar_color">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:id="@+id/backArrowBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/backarrow"
+            android:layout_marginTop="8dp"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/titleName"
+            android:text="Team Nougat"
+            android:layout_toRightOf="@+id/backArrowBtn"
+            android:textSize="32sp"
+            android:layout_marginLeft="12dp"
+            android:textColor="@color/DarkGrey"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/member_list"
+            android:layout_below="@+id/titleName"
+            android:layout_alignStart="@id/titleName"
+            android:text="Members List"
+            android:textSize="18sp"
+            android:textColor="@color/black" />
+
+
+    </RelativeLayout>
+
+
+</androidx.appcompat.widget.Toolbar>
