@@ -18,6 +18,7 @@
         android:theme="@style/Theme.Haaziri">
         <activity
             android:name=".teamhome.OwnerRecentSessionsActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"
             android:exported="true" />
         <activity
             android:name=".sessions.CurrentSessionActivity"
@@ -27,7 +28,7 @@
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <activity
             android:name=".teamhome.TeamHomeGuest"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+            android:theme="@style/Theme.MaterialComponents.Light.NoActionBar" />
         <activity
             android:name=".Profile.ProfileEditActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />

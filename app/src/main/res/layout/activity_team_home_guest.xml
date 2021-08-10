@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -7,15 +7,33 @@
     tools:context=".teamhome.TeamHomeGuest">
 
 
-    <!-- TODO: update this button as per your convenience-->
-    <!-- It has been implemented for now as for testing purposes-->
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/team_home_toolbar" />
+
     <Button
         android:id="@+id/giveHaaziriBtn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#5FEBD6 "
+        android:text="Make Hazziri Now"
+        android:textColor="#ffffff"
+        android:textSize="16sp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginBottom="16dp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/teamCodeTv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="32dp"
-        android:text="Give Haaziri"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+        android:layout_below="@id/toolbar"
+        android:text="abc-123-7yf"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="16dp"
+        android:textColor="@color/black"
+        android:textSize="18sp" />
+    <!-- TODO: update this button as per your convenience-->
+    <!-- It has been implemented for now as for testing purposes-->
+</RelativeLayout>

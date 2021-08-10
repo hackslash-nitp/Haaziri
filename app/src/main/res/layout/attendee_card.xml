@@ -10,7 +10,7 @@
         android:layout_marginLeft="10dp"
         android:id="@+id/memberCardView"
         app:cardElevation="10dp"
-
+        android:id="@+id/attendeecardview"
         app:strokeColor="@color/Grey"
         app:strokeWidth="4dp"
         app:cardCornerRadius="14dp"
@@ -26,6 +26,7 @@
             android:id="@+id/memberName"
             android:textColor="@color/black"
             android:layout_marginTop="20dp"
+            android:id="@+id/attendeename"
             />
         <ImageView
             android:layout_width="80dp"
@@ -38,7 +39,7 @@
             android:layout_width="70dp"
             android:layout_height="50dp"
             android:src="@drawable/tick"
-            android:id="@+id/tickiv"
+            android:id="@+id/ticktv"
             android:layout_marginLeft="310dp"
             android:layout_marginTop="20dp"
             />

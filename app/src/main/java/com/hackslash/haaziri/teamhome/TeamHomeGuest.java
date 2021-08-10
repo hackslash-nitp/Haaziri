@@ -2,6 +2,7 @@ package com.hackslash.haaziri.teamhome;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
@@ -14,11 +15,14 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.PackageManager;
+import android.media.Image;
 import android.os.Bundle;
 import android.text.InputFilter;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -57,6 +61,9 @@ public class TeamHomeGuest extends AppCompatActivity {
     private boolean found = false;
     private UserProfile currentUserProfile;
     private FirebaseUser currentUser;
+    private TextView teamNameTv;
+    private TextView teamCodeTv;
+    private ImageView backBtn;
     /**
      * This is a broadcast receiver that handles new found devices
      * and adds its name to found devices list, from where we would
@@ -106,6 +113,8 @@ public class TeamHomeGuest extends AppCompatActivity {
                 dialog.hideDialog();
                 currentSessionId = snapshot.child("currentSessionId").getValue(String.class);
                 currentTeam = snapshot.getValue(Team.class);
+                teamNameTv.setText(currentTeam.getTeamName());
+                teamCodeTv.setText("Team code: " + currentTeam.getTeamCode());
             }
 
             @Override
@@ -152,6 +161,7 @@ public class TeamHomeGuest extends AppCompatActivity {
                 checkPermissions();
             }
         });
+        backBtn.setOnClickListener(v -> finish());
     }
 
     private void checkPermissions() {
@@ -178,6 +188,10 @@ public class TeamHomeGuest extends AppCompatActivity {
         giveHaaziriBtn = findViewById(R.id.giveHaaziriBtn);
         dialog = new ActivityDialog(mContext);
         dialog.setCancelable(false);
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        teamNameTv = toolbar.findViewById(R.id.teamNameTv);
+        teamCodeTv = findViewById(R.id.teamCodeTv);
+        backBtn = toolbar.findViewById(R.id.backBtn);
 
         BluetoothManager manager = (BluetoothManager) getSystemService(BLUETOOTH_SERVICE);
         adapter = manager.getAdapter();

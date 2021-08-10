@@ -1,42 +1,63 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.appcompat.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_height="160dp"
+    android:id="@+id/toolbar1"
+    android:background="@drawable/rectangle_1"
     android:layout_width="match_parent"
-    android:layout_height="120dp"
-    android:background="@color/home_status_bar_color">
 
+
+    >
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:padding="16dp"
+        >
+        <!--        <ImageView-->
+        <!--            android:layout_width="wrap_content"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:id="@+id/img"-->
+        <!--            android:src="@drawable/rectangle_2"-->
+        <!--            android:layout_alignParentEnd="true"-->
+        <!--            />-->
+
+        <!-- Never give size in px -->
         <ImageView
-            android:id="@+id/backArrowBtn"
+            android:id="@+id/backBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/backarrow"
-            android:layout_marginTop="8dp"/>
+            android:layout_marginTop="16dp"
+            app:srcCompat="@drawable/backarrow" />
+
+        <!--   NOTE:     Never use image view for text-->
+
         <TextView
+            android:id="@+id/teamNameTv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/titleName"
-            android:text="Team Nougat"
-            android:layout_toRightOf="@+id/backArrowBtn"
+            android:layout_alignTop="@id/backBtn"
+            android:layout_marginStart="16dp"
+            android:layout_toEndOf="@id/backBtn"
+            android:fontFamily="@font/roboto"
+            android:textColor="@color/black"
             android:textSize="32sp"
-            android:layout_marginLeft="12dp"
-            android:textColor="@color/DarkGrey"
-            />
+            tools:text="Team Nougat" />
 
         <TextView
+            android:id="@+id/recentSessionsLabel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/member_list"
-            android:layout_below="@+id/titleName"
-            android:layout_alignStart="@id/titleName"
-            android:text="Members List"
+            android:layout_below="@id/teamNameTv"
+            android:layout_alignStart="@id/teamNameTv"
+            android:layout_marginTop="4dp"
+            android:fontFamily="@font/roboto"
+            android:text="@string/recent_sessions"
+            android:textColor="@color/black"
             android:textSize="18sp"
-            android:textColor="@color/black" />
-
+            app:srcCompat="@drawable/recent_sessions" />
 
     </RelativeLayout>
-
 
 </androidx.appcompat.widget.Toolbar>
