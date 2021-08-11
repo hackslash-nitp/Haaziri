@@ -20,10 +20,12 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.hackslash.haaziri.R;
 import com.hackslash.haaziri.activitydialog.ActivityDialog;
@@ -56,7 +58,6 @@ public class CurrentSessionActivity extends AppCompatActivity {
     private ImageView icon;
     private TextView attendeeName;
     private CardView attendeeCardview;
-    private ArrayList<SessionAttendee> attendeeIds;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -83,12 +84,25 @@ public class CurrentSessionActivity extends AppCompatActivity {
 
         setupListeners();
         setupRecyclerViews();
-        fetchAttendeeData();
+        //fetchAttendeeData();
     }
 
     private void setupListeners() {
         backBtn.setOnClickListener(v -> closeSession());
         stopBtn.setOnClickListener(v -> closeSession());
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        if (attendeeAdapter != null)
+            attendeeAdapter.startListening();
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        attendeeAdapter.stopListening();
     }
 
     private void closeSession() {
@@ -153,35 +167,15 @@ public class CurrentSessionActivity extends AppCompatActivity {
         attendeeCardview = findViewById(R.id.attendeecardview);
 
     }
-    public void fetchAttendeeData() {
-
-        FirebaseVars.mRootRef.child("/teams/"+teamCode+ "/sessions/"+sessionId+"/attendees/" ).addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                //as we get the team object from firebase we populate the details in the UI,
-                if (snapshot.exists()) {
-                    attendeeIds.clear();
-                    for (DataSnapshot snapshot1 : snapshot.getChildren()) {
-                        SessionAttendee attendee = snapshot1.getValue(SessionAttendee.class);
-                        MotionToastUtitls.showSuccessToast(mContext, "Present", attendee.getName() + " Present");
-                        attendeeIds.add(attendee);
-                    }
-                    //TODO: This is disabled temporarily because of crash
-//                    attendeeAdapter.notifyDataSetChanged();
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-                Log.d(TAG, error.getMessage());
-            }
-        });
-    }
 
     private void setupRecyclerViews() {
-        attendeeIds = new ArrayList<>();
-
-        attendeeAdapter = new AttendeeAdapter(attendeeIds, mContext);
+        Query query = FirebaseVars.mRootRef.child("teams")
+                .child(teamCode).child("sessions").child(sessionId)
+                .child("attendees");
+        FirebaseRecyclerOptions<SessionAttendee> options = new FirebaseRecyclerOptions.Builder<SessionAttendee>()
+                .setQuery(query, SessionAttendee.class)
+                .build();
+        attendeeAdapter = new AttendeeAdapter(options, mContext);
 
         attendenceRecycler.setLayoutManager(new LinearLayoutManager(mContext));
         attendenceRecycler.setAdapter(attendeeAdapter);

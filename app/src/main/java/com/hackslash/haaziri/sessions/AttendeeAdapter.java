@@ -12,6 +12,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 
+import com.firebase.ui.database.FirebaseRecyclerAdapter;
+import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.hackslash.haaziri.home.JoinedTeamsAdapter;
 import com.hackslash.haaziri.home.TeamClickInterface;
 import com.hackslash.haaziri.models.SessionAttendee;
@@ -25,15 +27,15 @@ import com.hackslash.haaziri.models.Team;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class AttendeeAdapter extends RecyclerView.Adapter<AttendeeAdapter.ViewHolder> {
-    private static final String TAG="AttendeeAdapter";
+public class AttendeeAdapter extends FirebaseRecyclerAdapter<SessionAttendee, AttendeeAdapter.ViewHolder> {
+    private static final String TAG = "AttendeeAdapter";
     private final Context mContext;
 
     private ArrayList<SessionAttendee> attendeeIds;
 
 
-    public AttendeeAdapter(  ArrayList<SessionAttendee> attendeeIds,Context mContext) {
-        this.attendeeIds=attendeeIds;
+    public AttendeeAdapter(FirebaseRecyclerOptions<SessionAttendee> options, Context mContext) {
+        super(options);
         this.mContext = mContext;
 
     }
@@ -42,18 +44,12 @@ public class AttendeeAdapter extends RecyclerView.Adapter<AttendeeAdapter.ViewHo
     @Override
     public AttendeeAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View joinView = LayoutInflater.from(parent.getContext()).inflate(R.layout.attendee_card, parent, false);
-        return new AttendeeAdapter.ViewHolder(joinView);
+        return new ViewHolder(joinView);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull AttendeeAdapter.ViewHolder holder, int position) {
-             holder.setData(attendeeIds.get(position));
-    }
-
-    @Override
-    public int getItemCount( ) {
-
-        return  attendeeIds.size();
+    protected void onBindViewHolder(@NonNull ViewHolder holder, int position, @NonNull SessionAttendee model) {
+        holder.setData(model);
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
